@@ -1,16 +1,51 @@
+// Necessary Validators
 import {ComponentValidator} from 'validators/component_validator';
+import {JSONAPIValidator}   from 'validators/jsonapi_validator';
 import {LinksValidator}     from 'validators/links_validator';
+import {IncludedValidator}  from 'validators/included_validator';
+// Functions
+import {isDefined}          from 'validators/functions/types/is_defined';
+// Error Class
+import {ValidationError}    from 'errors/validation_error';
 
 export class RootValidator extends ComponentValidator {
   constructor(object) {
     super(object);
   }
   validate() {
-    if (this.object.links !== undefined) {
-      // Validate Links
+    // Top Level http://jsonapi.org/format/#document-top-level
+
+    // A document MUST contain at least one of the following top-level members:
+    if (
+      this.object.data   === undefined &&
+      this.object.errors === undefined &&
+      this.object.meta   === undefined
+    ) {
+      this.errors.push(new ValidationError(this.stack, 'A document MUST contain at least one of the following top-level members: data, errors or meta.'));
+    }
+
+    // A document MAY contain a jsonapi top-level member
+    if (isDefined(this.object.jsonapi)) {
+      // This document had a jsonapi top-level member; validate jsonapi
+      this.stack.push('jsonapi');
+      var jsonapi_validator = new JSONAPIValidator(this.object.jsonapi, this.stack);
+      this.errors = this.errors.concat(jsonapi_validator.validate().errors);
+      this.stack.pop();
+    }
+    // A document MAY contain a links top-level member
+    if (isDefined(this.object.links)) {
+      // This document had a links top-level member; validate links
       this.stack.push('links');
       var links_validator = new LinksValidator(this.object.links, this.stack);
       this.errors = this.errors.concat(links_validator.validate().errors);
+      this.stack.pop();
+    }
+    // A document MAY contain a included top-level member
+    if (isDefined(this.object.included)) {
+      // This document had a included top-level member; validate included
+      this.stack.push('included');
+      var included_validator = new IncludedValidator(this.object.included, this.stack);
+      this.errors = this.errors.concat(included_validator.validate().errors);
       this.stack.pop();
     }
 

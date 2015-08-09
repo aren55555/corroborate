@@ -1,11 +1,10 @@
-import {JSONApiVaidator} from 'json_api_validator';
+import {JSONApiFormatVaidator} from 'json_api_format_validator';
 
 var json = {
   "links": {
     "self": "http://example.com/posts",
     "next": "http://example.com/posts?page[offset]=2",
-    "last": "http://example.com/posts?page[offset]=10",
-    "aren": true
+    "last": "http://example.com/posts?page[offset]=10"
   },
   "data": [{
     "type": "posts",
@@ -68,7 +67,7 @@ var json = {
   }]
 };
 
-var v = new JSONApiVaidator(json);
+var v = new JSONApiFormatVaidator(json);
 
 var validation_result = v.validate();
 

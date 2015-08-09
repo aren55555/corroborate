@@ -1,7 +1,7 @@
 import {RootValidator} from 'validators/root_validator';
 import {ComponentValidator} from 'validators/component_validator';
 
-export class JSONApiVaidator {
+export class JSONApiFormatVaidator {
   constructor(json_api_object) {
     if (typeof json_api_object === 'string') {
       // Attempt to Parse the JSON string
