@@ -10,6 +10,16 @@ import {validateURL}        from 'validators/functions/validate_url';
 
 export class LinkValidator extends ComponentValidator {
   validate() {
+    // Will validate object similar to:
+    // "http://example.com/posts"
+    // or:
+    // {
+    //     "href": "http://example.com/articles/1/comments",
+    //     "meta": {
+    //         "count": 10
+    //     }
+    // }
+
     if (isString(this.object)) {
       // Validate URL
       if (!validateURL(this.object)) {
