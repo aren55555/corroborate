@@ -1,12 +1,13 @@
 // Necessary Validators
-import {ComponentValidator} from 'validators/component_validator';
-import {JSONAPIValidator}   from 'validators/jsonapi_validator';
-import {LinksValidator}     from 'validators/links_validator';
-import {IncludedValidator}  from 'validators/included_validator';
+import {ComponentValidator}   from 'validators/component_validator';
+import {PrimaryDataValidator} from 'validators/primary_data_validator';
+import {JSONAPIValidator}     from 'validators/jsonapi_validator';
+import {LinksValidator}       from 'validators/links_validator';
+import {IncludedValidator}    from 'validators/included_validator';
 // Functions
-import {isDefined}          from 'validators/functions/types/is_defined';
+import {isDefined}            from 'validators/functions/types/is_defined';
 // Error Class
-import {ValidationError}    from 'errors/validation_error';
+import {ValidationError}      from 'errors/validation_error';
 
 export class RootValidator extends ComponentValidator {
   constructor(object) {
@@ -17,11 +18,29 @@ export class RootValidator extends ComponentValidator {
 
     // A document MUST contain at least one of the following top-level members:
     if (
-      this.object.data   === undefined &&
-      this.object.errors === undefined &&
-      this.object.meta   === undefined
+      !isDefined(this.object.data) &&
+      !isDefined(this.object.errors) &&
+      !isDefined(this.object.meta)
     ) {
       this.errors.push(new ValidationError(this.stack, 'A document MUST contain at least one of the following top-level members: data, errors or meta.'));
+    }
+
+    if (isDefined(this.object.data)) {
+      this.stack.push('data');
+      var primary_data_validator = new PrimaryDataValidator(this.object.data, this.stack);
+      this.errors = this.errors.concat(primary_data_validator.validate().errors);
+      this.stack.pop();
+    }
+
+    // If a document does not contain a top-level data key, the included member
+    //  MUST NOT be present either.
+    if (
+      !isDefined(this.object.data) &&
+      isDefined(this.object.included)
+    ) {
+      this.stack.push('included');
+      this.errors.push(new ValidationError(this.stack, 'The documenet did not contain a top-level data key, the included member MUST NOT be present either.'));
+      this.stack.pop();
     }
 
     // A document MAY contain a jsonapi top-level member

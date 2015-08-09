@@ -24,13 +24,18 @@ export class LinkValidator extends ComponentValidator {
       // Validate URL
       if (!validateURL(this.object)) {
         // TODO: this should not be an 'error' as it does not violate the specific
-        //        should probably be a 'warning'
+        //        should probably be a 'warning' (same goes for the below)
         this.errors.push(new ValidationError(this.stack, 'did not appear to be a valid URL.'));
       }
     } else if (isDictionary(this.object)) {
       // Validate contents
-      if (isDefined(this.object.href)) {
-        // TODO: Validate URL
+      if (
+        isDefined(this.object.href) &&
+        !validateURL(this.object)
+      ) {
+        this.stack.push('href');
+        this.errors.push(new ValidationError(this.stack, 'did not appear to be a valid URL.'));
+        this.stack.pop();
       }
       if (isDefined(this.object.meta)) {
         // Validate Meta Object
