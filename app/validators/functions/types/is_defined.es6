@@ -1,3 +1,3 @@
 export function isDefined (object) {
-   return object !== undefined
+   return object !== undefined;
 }
