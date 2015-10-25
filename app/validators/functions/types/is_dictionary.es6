@@ -1,4 +1,3 @@
-// Functions
 import {isObject} from './is_object';
 import {isArray}  from './is_array';
 
