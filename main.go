@@ -34,7 +34,7 @@ func main() {
 		if result.HasErrors() {
 			fmt.Println("Invalid JSON API:")
 			i := 1
-			for err := range result.Errors {
+			for err := range result.Errors() {
 				fmt.Printf("%d. %v\n", i, err)
 				i++
 			}

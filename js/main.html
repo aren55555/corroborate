@@ -1,0 +1,38 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="main.js"></script>
+  <script src="validation-ui.js"></script>
+  <title>Corroborate | JSON API Validator</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1 class="page-header">
+      Corroborate
+      <small>
+        <a href="http://jsonapi.org/">
+          JSON API
+        </a>
+        Validator
+      </small>
+      <div class="pull-right">
+        <a class="btn btn-default" href="https://github.com/aren55555/corroborate">
+          Source Code
+        </a>
+      </div>
+    </h1>
+
+    <div id="input">
+      <div class="form-group">
+        <textarea class="form-control" id="json" placeholder="Paste JSON API payload here" rows="10"></textarea>
+      </div>
+      <a class="btn btn-primary" onclick="startValidation()">Validate</a>
+    </div>
+    <hr />
+
+    <div id="result">
+      <!-- Populated By JS -->
+    </div>
+  </div>
+</body>
+</html>
