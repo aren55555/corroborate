@@ -21,7 +21,7 @@ func newJSResult(result *jsonapivalidator.Result) *jsResult {
 
 // Errors will exposed the validation result's errors
 func (r *jsResult) Errors() (errors []string) {
-	for _, e := range r.result.Errors {
+	for _, e := range r.result.Errors() {
 		errors = append(errors, e.Error())
 	}
 	return
