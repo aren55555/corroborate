@@ -2,3 +2,10 @@
 set -e
 
 gopherjs build main.go -m
+
+BUILD_DIR="html"
+
+mkdir -p $BUILD_DIR
+mv main.js* $BUILD_DIR/
+cp index.html $BUILD_DIR/
+cp validation-ui.js $BUILD_DIR/
