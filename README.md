@@ -8,7 +8,7 @@ The underlying validations of this tool are provided by [github.com/aren55555/js
 
 ### GUI
 
-To build the GUI you should have [Docker](), [Go](https://golang.org/) and [GopherJS](https://gopherjs.github.io/) installed.
+To build the GUI you should have [Docker](https://www.docker.com/), [Go](https://golang.org/) and [GopherJS](https://gopherjs.github.io/) installed.
 
 ```bash
 go get -u github.com/aren55555/jsonapivalidator
