@@ -2,4 +2,4 @@
 set -e
 
 ./build
-docker build -t aren55555/corroborate .
+docker build -t corroborate .
