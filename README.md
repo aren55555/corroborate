@@ -8,6 +8,18 @@ The underlying validations of this tool are provided by [github.com/aren55555/js
 
 ### GUI
 
+#### Prebuilt
+
+**[corroborate.arenpatel.com](http://corroborate.arenpatel.com/)**
+
+#### From Dockerhub
+
+```bash
+docker run -d -p 8080:80 aren55555/corroborate
+```
+
+#### From Source
+
 To build the GUI you should have [Docker](https://www.docker.com/), [Go](https://golang.org/) and [GopherJS](https://gopherjs.github.io/) installed.
 
 ```bash
