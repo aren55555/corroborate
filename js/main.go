@@ -29,7 +29,7 @@ func (r *jsResult) Errors() (errors []string) {
 
 // Warnings will expose the validation result's warnings as strings
 func (r *jsResult) Warnings() (warnings []string) {
-	for _, w := range r.result.Errors() {
+	for _, w := range r.result.Warnings() {
 		warnings = append(warnings, w.Error())
 	}
 	return
