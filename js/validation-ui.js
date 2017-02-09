@@ -1,4 +1,8 @@
 function startValidation() {
+  var greenClass =  "text-success"
+  var redClass =    "text-danger";
+  var yellowClass = "text-warning";
+
   // Clear Existing Results
   var result = document.querySelector('#result');
   result.innerHTML = '';
@@ -18,26 +22,47 @@ function startValidation() {
   // Perform Validation
   var validationResults = window.jsonapivalidator(obj);
 
-  // Write out the results
+  if (validationResults.Valid()) {
+    var successHeading = document.createElement('h3');
+    successHeading.innerHTML = "No Errors!";
+    successHeading.className = greenClass;
+    return;
+  }
+
+  // Write out the Errors
   var errors = validationResults.Errors();
-
-  var resultHeading = document.createElement('h3');
   if (errors.length > 0) {
-    resultHeading.innerHTML = "Errors:";
-    resultHeading.className = "text-danger";
-  } else {
-    resultHeading.innerHTML = "No Errors!";
-    resultHeading.className = "text-success";
+    var errorsHeading = document.createElement('h3');
+    errorsHeading.innerHTML = "Errors:";
+    errorsHeading.className = redClass;
+    result.appendChild(errorsHeading);
+
+    var errorsContent = document.createElement('ul');
+    for (i = 0; i < errors.length; i++) {
+      var li = document.createElement('li');
+      li.className = redClass;
+      li.innerHTML = errors[i];
+      errorsContent.appendChild(li);
+    }
+    result.appendChild(errorsContent);
   }
-  result.appendChild(resultHeading);
 
 
-  var resultsHTML = document.createElement('ul');
-  for (i = 0; i < errors.length; i++) {
-    var li = document.createElement('li');
-    li.className = "text-danger";
-    li.innerHTML = errors[i];
-    resultsHTML.appendChild(li);
+  // Write out the Warnings
+  var warnings = validationResults.Warnings();
+  if (warnings.length > 0) {
+    var warningsHeading = document.createElement('h3');
+    warningsHeading.innerHTML = "Warnings:";
+    warningsHeading.className = yellowClass;
+    result.appendChild(warningsHeading);
+
+    var warningsContent = document.createElement('ul');
+    for (i = 0; i < warnings.length; i++) {
+      var li = document.createElement('li');
+      li.className = yellowClass;
+      li.innerHTML = warnings[i];
+      warningsContent.appendChild(li);
+    }
+    result.appendChild(warningsContent);
   }
-  result.appendChild(resultsHTML);
 }

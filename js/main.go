@@ -35,6 +35,11 @@ func (r *jsResult) Warnings() (warnings []string) {
 	return
 }
 
+// Valid returns whether or not the result was valid
+func (r *jsResult) Valid() bool {
+	return r.result.IsValid()
+}
+
 func validate(input *js.Object) *js.Object {
 	data := js.Global.Get("JSON").Call("stringify", input).String()
 
