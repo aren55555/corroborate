@@ -22,10 +22,12 @@ function startValidation() {
   // Perform Validation
   var validationResults = window.jsonapivalidator(obj);
 
+  // If valid show a success message
   if (validationResults.Valid()) {
     var successHeading = document.createElement('h3');
-    successHeading.innerHTML = "No Errors!";
+    successHeading.innerHTML = "Valid!";
     successHeading.className = greenClass;
+    result.appendChild(successHeading);
     return;
   }
 
