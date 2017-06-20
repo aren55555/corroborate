@@ -25,6 +25,11 @@ class Corroborate extends Component {
     } catch(e) {
       // TODO: handle the unparsable JSON case
       console.log("Invalid JSON");
+      this.setState({
+        warnings: [],
+        errors:   ["Invalid JSON"],
+        valid:    false,
+      })
       return;
     }
 
@@ -34,7 +39,6 @@ class Corroborate extends Component {
       warnings: result.Warnings(),
       errors:   result.Errors(),
       valid:    result.Valid(),
-      payload:  JSON.stringify(obj, null, 2),
     })
 
     return;
@@ -45,8 +49,7 @@ class Corroborate extends Component {
       <div className="container-fluid">
         <Header />
         <Input
-          onChange={this.onChange}
-          payload={this.state.payload} />
+          onChange={this.onChange} />
         <hr/>
         <Results
           warnings={this.state.warnings}

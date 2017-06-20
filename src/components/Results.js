@@ -7,9 +7,9 @@ class Results extends Component {
     if (hasResults) {
       var resultLabel;
       if (this.props.valid) {
-        resultLabel = <span className="label label-success">Valid</span>;
+        resultLabel = <span className="label label-success">Valid JSON API</span>;
       } else {
-        resultLabel = <span className="label label-danger">Invalid</span>
+        resultLabel = <span className="label label-danger">Invalid JSON API</span>
       }
       var heading = (
         <h3>
@@ -20,9 +20,9 @@ class Results extends Component {
       // Display the Warnings
       if (this.props.warnings && this.props.warnings.length > 0) {
         var warningsListItems = [];
-        for (let w of this.props.warnings) {
-          warningsListItems.push(<li>{w}</li>);
-        }
+        this.props.warnings.forEach(function(w, i) {
+          errorsListItems.push(<li key={"warnings_" + i}>{w}</li>);
+        });
 
         var warningsList = (
           <div className="text-warning">
@@ -35,9 +35,9 @@ class Results extends Component {
       // Dipslay the Errors
       if (this.props.errors && this.props.errors.length > 0) {
         var errorsListItems = [];
-        for (let e of this.props.errors) {
-          errorsListItems.push(<li>{e}</li>);
-        }
+        this.props.errors.forEach(function(e, i) {
+          errorsListItems.push(<li key={"errors_" + i}>{e}</li>);
+        });
 
         var errorsList = (
           <div className="text-danger">
