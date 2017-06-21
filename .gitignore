@@ -8,6 +8,8 @@
 
 # production
 /build
+/public/jsonapivalidator/main.js
+/public/jsonapivalidator/main.js.map
 
 # misc
 .DS_Store

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+docker run -d -p 8080:80 --name corroborate corroborate
+open http://localhost:8080/

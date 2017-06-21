@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+gopherjs build public/jsonapivalidator/main.go -m -o public/jsonapivalidator/main.js
+yarn build
