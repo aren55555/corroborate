@@ -2,7 +2,7 @@
 
 A command line tool and GUI that determines whether JSON payloads are in compliance with the JSON API specification. If the JSON is not compliant this tool will indicate the reason why.
 
-The underlying validations of this tool are provided by [github.com/aren55555/jsonapivalidator](https://github.com/aren55555/jsonapivalidator); which has been it has been compiled to JS via [GopherJS](https://gopherjs.github.io/).
+The underlying validations of this tool are provided by [github.com/aren55555/jsonapivalidator](https://github.com/aren55555/jsonapivalidator), which has been compiled to JS via [GopherJS](https://gopherjs.github.io/).
 
 ## Build
 
@@ -20,14 +20,23 @@ docker run -d -p 8080:80 aren55555/corroborate
 
 #### From Source
 
-To build the GUI you should have [Docker](https://www.docker.com/), [Go](https://golang.org/) and [GopherJS](https://gopherjs.github.io/) installed.
+Every tool the build needs (Go, GopherJS, just, Colima, Lima, the Docker CLI and buildx) is pinned in `mise.toml`. Install [mise](https://mise.jdx.dev/), then:
 
 ```bash
-go get -u github.com/aren55555/jsonapivalidator
-cd $GOPATH/src/github.com/aren55555/jsonapivalidator/js
-./docker-build
+git clone https://github.com/aren55555/corroborate
+cd corroborate
+mise install
 
-./docker-start
-# GUI running
-./docker-stop
+just build         # compile the GUI into js/html
+just docker-start  # start Colima, build the image, run it on :8080
+just docker-stop
+```
+
+Run `just` to list every recipe. `just docker-push` builds for `linux/amd64` and `linux/arm64` and pushes to Docker Hub (log in first with `docker login`).
+
+### CLI
+
+```bash
+just build-cli
+echo '{"data": null}' | ./bin/corroborate
 ```

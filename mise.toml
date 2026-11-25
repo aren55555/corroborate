@@ -1,0 +1,17 @@
+# Toolchain for corroborate. Run `mise install` to fetch everything.
+[tools]
+# The first Go listed is the one on PATH: it builds the CLI and the gopherjs
+# binary itself (Go 1.21 binaries lack LC_UUID and won't launch on new macOS;
+# Go 1.27 dropped GODEBUG=gotypesalias=0, which gopherjs v1.21 relies on).
+# GopherJS v1.21 compiles against a Go 1.21.x stdlib, so 1.21 is installed too
+# and the justfile points GOPHERJS_GOROOT at it.
+go = ["1.26.11", "1.21.13"]
+"go:github.com/gopherjs/gopherjs" = "v1.21.0"
+
+just = "1.59.0"
+
+# Container runtime: Colima runs the Docker daemon inside a Lima VM.
+colima = "0.10.3"
+lima = "2.3.0"
+docker-cli = "29.10.1"
+"aqua:docker/buildx" = "0.39.1"

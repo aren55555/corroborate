@@ -1,0 +1,4 @@
+github.com/aren55555/jsonapivalidator v0.0.0-20170607031900-14362f43d4f9 h1:sppGuzuRs+d9LjoQhSC2DkSgSu6svEKmqQ832H4tlD4=
+github.com/aren55555/jsonapivalidator v0.0.0-20170607031900-14362f43d4f9/go.mod h1:w2Qv6O6lU3yepOzsfS6wRvAgstLBMrUCF7xDNfW922E=
+github.com/gopherjs/gopherjs v1.21.0 h1:5HEGrz+XhpCchubMGzuyLuGoCTlL/yCT7sGsT5Se/dw=
+github.com/gopherjs/gopherjs v1.21.0/go.mod h1:R2HIOen3IzYSzvmvkeD8WOfiLN9wueR/T5Y+6z326Ck=

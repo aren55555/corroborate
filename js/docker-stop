@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-docker stop corroborate
-docker rm corroborate

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-docker tag corroborate aren55555/corroborate
-docker push aren55555/corroborate
